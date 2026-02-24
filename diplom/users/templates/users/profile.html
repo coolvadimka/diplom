@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Профиль</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="profile-avatar">
+        {% if user.photo %}
+            <img id="photoPreview" src="{{ user.photo.url }}">
+        {% else %}
+            <img id="photoPreview" src="/media/users/def.png">
+        {% endif %}
+    </div>
+
+    <div class="form-error">{{ form.non_field_errors }}</div>
+    {% for f in form %}
+    <p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+    <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<hr>
+<a href="{% url 'users:password_change' %}">Сменить пароль</a>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'discrete_math/js/profile.js' %}"></script>
+{% endblock %}

@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, UpdateView
 
+
 from users.forms import LoginUserForm, RegisterUserForm, ProfileUserForm, UserPasswordChangeForm
 
 
@@ -51,6 +52,8 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset = None):
         return self.request.user
+
+
 
 
 class UserPasswordChange(PasswordChangeView):

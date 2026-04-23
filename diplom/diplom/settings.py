@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'discrete_math',
     'users',
+    'materials',
+    'calculator',
+    'testing',
 ]
 
 MIDDLEWARE = [

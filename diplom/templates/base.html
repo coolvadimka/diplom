@@ -15,7 +15,9 @@
     <header>
         <div class="nav-container">
 
-            <img src="{% static 'discrete_math/images/stankin-logo.svg' %}" alt="Лого">
+            <a href="{% url 'home' %}" class="brand-link">
+                <img src="{% static 'discrete_math/images/stankin-logo.svg' %}" alt="Лого">
+            </a>
             <nav>
                 <ul>
                     <li><a href="{% url 'home' %}"><i class="fas fa-home"></i> Главная</a></li>
@@ -23,7 +25,9 @@
                     <li><a href="#"><i class="fas fa-paper-plane"></i> Контакты</a></li>
                 </ul>
             </nav>
+
             <span class="logo">DiscreteMath</span>
+
 
             {% if user.is_authenticated  %}
             <div class="nav-link">
@@ -49,19 +53,19 @@
     <div class="sidebar-title">Разделы</div>
     <ul class="sidebar-menu">
         <li>
-            <a href="#">
+            <a href="{% url 'calculator:index' %}">
                 <i class="fas fa-calculator"></i>
                 Калькулятор
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{% url 'testing:list' %}">
                 <i class="fas fa-check-circle"></i>
                 Тестирование
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="{% url 'materials:list' %}">
                 <i class="fas fa-book"></i>
                 Учебные материалы
             </a>

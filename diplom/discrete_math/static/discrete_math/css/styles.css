@@ -253,4 +253,1174 @@ nav ul li {
 }
 
 
+/*для materials*/
 
+/* Учебные материалы */
+
+.materials-title{
+  margin: 0 !important;
+  color: #ffffff !important;
+  font-size: 28px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  text-align: left !important;
+}
+
+/* Кнопка добавить материал */
+
+.materials-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.materials-title{
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.add-material-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 18px;
+  border-radius: 8px;
+
+  background: #7a5cff;
+  border: none;
+  color: #fff;
+
+  line-height: 1;
+  height: 40px;
+
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+
+  cursor: pointer;
+  transition: transform 0.2s ease,
+              background 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.add-material-btn:hover{
+  transform: translateY(-2px);
+  background: #9275ff;
+  box-shadow: 0 6px 14px rgba(122,92,255,0.35);
+}
+
+/* Карточка */
+
+.dm-card-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.dm-card{
+  background: #313335;
+  border: 2px solid #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.dm-card-title{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.materials-list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dm-card-meta{
+  margin-top: 10px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+}
+
+.dm-card-text{
+  margin-top: 10px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.85);
+}
+
+.material-status{
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.material-status.published{
+  background: rgba(31,191,117,0.15);
+  color: #1fbf75;
+  border: 1px solid rgba(31,191,117,0.4);
+}
+
+.material-status.draft{
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.65);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Кнопки */
+
+.dm-card-actions{
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.actions-left{
+  display: flex;
+  gap: 12px;
+}
+
+.action-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 38px;
+  padding: 0 14px;
+  border-radius: 8px;
+
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.action-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+  border-color: rgba(255,255,255,0.28);
+}
+
+.action-btn:active{
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.read-btn{
+  background: #7a5cff;
+  border-color: rgba(122,92,255,0.55);
+}
+
+.read-btn:hover{
+  background: #9275ff;
+}
+
+.edit-btn{
+  background: rgba(255,255,255,0.08);
+}
+
+.edit-btn:hover{
+  background: rgba(255,255,255,0.12);
+}
+
+.delete-btn{
+  background: rgba(235, 89, 89, 0.12);
+  border-color: rgba(235, 89, 89, 0.35);
+}
+
+.delete-btn:hover{
+  background: rgba(235, 89, 89, 0.18);
+  border-color: rgba(235, 89, 89, 0.55);
+}
+
+
+/* =========================
+   MATERIAL FORM (create/edit)
+   ========================= */
+
+.form-page{
+  max-width: 900px;
+}
+
+.form-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.form-title{
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.form-back{
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.form-back:hover{
+  color: #fff;
+}
+
+/* card container like your dm-card style */
+.form-card{
+  background: #2c2c2c;
+  border: 2px solid #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+/* rows */
+.form-row{
+  margin-top: 14px;
+}
+
+.form-row:first-child{
+  margin-top: 0;
+}
+
+.dm-label{
+  display: block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.75);
+  font-weight: 600;
+}
+
+/* inputs (works with Django widgets if they render input/textarea/select) */
+.form-card input[type="text"],
+.form-card input[type="url"],
+.form-card input[type="email"],
+.form-card input[type="number"],
+.form-card textarea,
+.form-card select{
+  width: 100%;
+  box-sizing: border-box;
+
+  background: #181818;
+  color: #fff;
+
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 10px;
+
+  padding: 10px 12px;
+  font-size: 14px;
+  outline: none;
+
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.form-card textarea{
+  min-height: 130px;
+  resize: vertical;
+}
+
+/* focus accent */
+.form-card input:focus,
+.form-card textarea:focus,
+.form-card select:focus{
+  border-color: rgba(122,92,255,0.70);
+  box-shadow: 0 0 0 3px rgba(122,92,255,0.18);
+}
+
+/* checkbox row */
+.form-check-row{
+  margin-top: 14px;
+}
+
+.check-wrap{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-card input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  accent-color: #7a5cff;
+}
+
+.dm-check-label{
+  font-size: 14px;
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+}
+
+.dm-help{
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.55);
+}
+
+/* errors */
+.dm-error{
+  margin-top: 8px;
+  font-size: 13px;
+  color: #ff6b6b;
+}
+
+/* buttons aligned like modern UI */
+.form-actions{
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* reuse action-btn idea */
+.form-actions .action-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.form-actions .action-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+}
+
+.form-actions .action-btn:active{
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* save / cancel */
+.save-btn{
+  background: #7a5cff;
+  border: 1px solid rgba(122,92,255,0.55);
+  color: #fff;
+}
+
+.save-btn:hover{
+  background: #9275ff;
+}
+
+.cancel-btn{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+}
+
+.cancel-btn:hover{
+  background: rgba(255,255,255,0.10);
+}
+
+
+.form-actions{
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.actions-right{
+  display: flex;
+  gap: 12px;
+}
+
+/* delete */
+.delete-btn{
+  background: rgba(235, 89, 89, 0.12);
+  border: 1px solid rgba(235, 89, 89, 0.35);
+  color: #fff;
+}
+
+.delete-btn:hover{
+  background: rgba(235, 89, 89, 0.18);
+  border-color: rgba(235, 89, 89, 0.55);
+}
+
+
+/* =========================
+   DELETE CONFIRM PAGE
+   ========================= */
+
+.delete-page{
+  max-width: 720px;
+}
+
+.delete-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.delete-title{
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.delete-back{
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.delete-back:hover{
+  color: #fff;
+}
+
+/* card like your dm-card but for delete */
+.delete-card{
+  background: #2c2c2c;
+  border: 2px solid #ffffff;
+  border-radius: 14px;
+  padding: 18px;
+}
+
+/* warning block */
+.delete-warning{
+  background: rgba(235, 89, 89, 0.12);
+  border: 1px solid rgba(235, 89, 89, 0.35);
+  color: rgba(255,255,255,0.92);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+/* object info */
+.delete-object{
+  padding: 12px 0 6px 0;
+}
+
+.delete-label{
+  font-size: 16px;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 6px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.delete-name{
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* actions align right */
+.delete-actions{
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+/* reuse button style */
+.delete-actions .action-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 8px;
+
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease;
+}
+
+.delete-actions .action-btn:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+}
+
+.delete-actions .action-btn:active{
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* delete / cancel */
+.delete-actions .delete-btn{
+  background: rgba(235, 89, 89, 0.16);
+  border: 1px solid rgba(235, 89, 89, 0.45);
+  color: #fff;
+}
+
+.delete-actions .delete-btn:hover{
+  background: rgba(235, 89, 89, 0.22);
+  border-color: rgba(235, 89, 89, 0.65);
+}
+
+.delete-actions .cancel-btn{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+}
+
+.delete-actions .cancel-btn:hover{
+  background: rgba(255,255,255,0.10);
+}
+
+
+/* =========================
+   MATERIAL DETAIL PAGE
+   ========================= */
+
+.detail-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.detail-title{
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.detail-back{
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.detail-back:hover{
+  color: #fff;
+}
+
+/* top row inside card */
+.detail-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.detail-meta{
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.4;
+}
+
+.detail-sep{
+  margin: 0 6px;
+  color: rgba(255,255,255,0.35);
+}
+
+/* separator */
+.detail-divider{
+  margin: 14px 0;
+  height: 1px;
+  background: rgba(255,255,255,0.14);
+}
+
+/* content typography */
+.detail-content{
+  font-size: 15px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.90);
+}
+
+/* actions bottom */
+.detail-actions{
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+
+
+
+
+/*Калькулятор*/
+
+/*Калькулятор*/
+
+.klogic-page {
+    padding: 16px 10px;
+}
+
+.klogic-card {
+    max-width: 1320px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid #d7e3f4;
+    border-radius: 20px;
+    box-shadow: 0 10px 24px rgba(28, 61, 110, 0.08);
+    padding: 22px;
+}
+
+.klogic-header {
+    margin-bottom: 16px;
+}
+
+.klogic-header h2 {
+    margin: 0 0 4px 0;
+    font-size: 28px;
+    line-height: 1.15;
+    color: #153a67;
+    font-weight: 800;
+}
+
+.klogic-header p {
+    margin: 0;
+    font-size: 14px;
+    color: #5f6f82;
+}
+
+.klogic-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.klogic-top-fields {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.klogic-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.klogic-field label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1f3f68;
+}
+
+.small-field {
+    width: 110px;
+}
+
+.klogic-field input {
+    min-height: 40px;
+    border-radius: 10px;
+    border: 1px solid #bfd0e5;
+    background: #f8fbff;
+    padding: 8px 10px;
+    font-size: 15px;
+    color: #173e6a;
+    transition: 0.2s ease;
+}
+
+.klogic-field input:focus {
+    outline: none;
+    border-color: #4b96e6;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(75, 150, 230, 0.12);
+}
+
+.klogic-hint {
+    font-size: 12px;
+    color: #728196;
+}
+
+.klogic-hint span {
+    color: #1f5fa8;
+    font-weight: 700;
+}
+
+.calc-panel {
+    background: linear-gradient(180deg, #f7fbff 0%, #eef5fd 100%);
+    border: 1px solid #d9e7f7;
+    border-radius: 16px;
+    padding: 14px;
+}
+
+.calc-panel-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #183f6d;
+    margin-bottom: 10px;
+}
+
+.calc-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(72px, 1fr));
+    gap: 8px;
+}
+
+.calc-btn {
+    border: 1px solid #b7cae3;
+    background: #ffffff;
+    color: #123a66;
+    border-radius: 10px;
+    min-height: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    padding: 4px 8px;
+}
+
+.calc-btn:hover {
+    transform: translateY(-1px);
+    border-color: #5d9ae0;
+    box-shadow: 0 6px 14px rgba(66, 127, 203, 0.14);
+}
+
+.calc-btn:active {
+    transform: translateY(0);
+}
+
+.btn-warning-soft {
+    background: #fff6df;
+}
+
+.btn-danger-soft {
+    background: #ffe7e7;
+}
+
+.btn-example {
+    background: #e8f3ff;
+}
+
+.calc-actions {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.main-submit-btn {
+    border: none;
+    background: linear-gradient(135deg, #2e7dd7 0%, #1d5dab 100%);
+    color: white;
+    font-size: 15px;
+    font-weight: 800;
+    border-radius: 12px;
+    padding: 10px 20px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(35, 95, 167, 0.24);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.main-submit-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(35, 95, 167, 0.28);
+}
+
+.calc-error {
+    margin-top: 18px;
+    border-radius: 14px;
+    background: #fff0f0;
+    border: 1px solid #f1c3c3;
+    color: #a03636;
+    padding: 12px 14px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.truth-table-block {
+    margin-top: 24px;
+}
+
+.truth-table-block h3 {
+    margin-bottom: 12px;
+    color: #183f6d;
+    font-size: 21px;
+}
+
+.truth-table-wrap {
+    overflow: auto;
+    border: 1px solid #d9e6f4;
+    border-radius: 16px;
+    background: #ffffff;
+}
+
+.truth-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px;
+    background: #ffffff;
+}
+
+.truth-table th,
+.truth-table td {
+    border-bottom: 1px solid #e4edf7;
+    padding: 8px 10px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.truth-table th {
+    background: #eef5fd;
+    color: #173e6a;
+    font-weight: 800;
+    position: sticky;
+    top: 0;
+}
+
+.truth-table td {
+    color: #1b2f47;
+    background: #ffffff;
+}
+
+.truth-table tr:hover td {
+    background: #f9fbfe;
+}
+
+.result-cell {
+    font-weight: 800;
+    color: #154d8c !important;
+}
+
+@media (max-width: 900px) {
+    .calc-grid {
+        grid-template-columns: repeat(4, minmax(68px, 1fr));
+    }
+
+    .klogic-card {
+        padding: 18px;
+    }
+
+    .klogic-header h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 600px) {
+    .calc-grid {
+        grid-template-columns: repeat(3, minmax(64px, 1fr));
+    }
+
+    .klogic-top-fields {
+        flex-direction: column;
+    }
+
+    .small-field {
+        width: 100%;
+    }
+
+    .klogic-page {
+        padding: 10px 6px;
+    }
+
+    .klogic-card {
+        border-radius: 14px;
+        padding: 14px;
+    }
+}
+
+.klogic-table-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #4d6178;
+    font-weight: 600;
+}
+
+.klogic-table-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #5b6f86;
+}
+
+
+.klogic-export-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: #1f7a43;
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.15s ease;
+}
+
+.klogic-export-btn:hover {
+    background: #196537;
+    color: #ffffff;
+}
+
+.klogic-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 4px;
+}
+
+.header-export-btn {
+    box-shadow: 0 6px 14px rgba(31, 122, 67, 0.18);
+}
+
+@media (max-width: 700px) {
+    .klogic-header-top {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-export-btn {
+        width: 100%;
+    }
+}
+
+
+.klogic-help-box {
+    margin-top: 14px;
+    background: #f8fbff;
+    border: 1px solid #d9e7f7;
+    border-radius: 14px;
+    padding: 14px;
+}
+
+.klogic-help-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #183f6d;
+    margin-bottom: 10px;
+}
+
+.klogic-help-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+    gap: 8px 16px;
+    font-size: 13px;
+    color: #35516f;
+}
+
+.klogic-help-grid strong {
+    color: #123a66;
+}
+
+@media (max-width: 700px) {
+    .klogic-help-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.help-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 18px;
+    height: 18px;
+
+    margin-left: 6px;
+
+    border-radius: 50%;
+    background: #4b96e6;
+    color: white;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+    position: relative;
+}
+
+/* окно подсказки */
+
+.help-tooltip {
+    position: absolute;
+
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 220px;
+
+    background: #ffffff;
+    color: #1b2f47;
+
+    border-radius: 10px;
+    border: 1px solid #d9e7f7;
+
+    padding: 10px 12px;
+
+    font-size: 12px;
+    line-height: 1.4;
+
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.2s;
+
+    z-index: 20;
+}
+
+.help-icon:hover .help-tooltip {
+    opacity: 1;
+}
+
+
+.klogic-forms-box {
+    margin-top: 24px;
+    background: #f8fbff;
+    border: 1px solid #d9e7f7;
+    border-radius: 14px;
+    padding: 16px;
+}
+
+.forms-switches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 10px;
+    margin-bottom: 16px;
+}
+
+.form-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #123a66;
+    cursor: pointer;
+}
+
+.form-toggle input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #8bc34a;
+    cursor: pointer;
+}
+
+.form-expression-block {
+    margin-top: 14px;
+    padding: 14px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #dce8f7;
+}
+
+.form-expression-title {
+    font-size: 14px;
+    font-weight: 800;
+    color: #183f6d;
+    margin-bottom: 10px;
+}
+
+.form-expression-text {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    border-radius: 10px;
+    border: 1px solid #bfd0e5;
+    background: #f8fbff;
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #173e6a;
+    box-sizing: border-box;
+}
+
+.klogic-forms-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #5b6f86;
+}
+
+
+
+.form-expression-block { /* внешний блок одной основной формы, чтобы между формами был ровный отступ */
+    margin-top: 18px; /* даём нормальное расстояние сверху, чтобы форма не прилипала к соседним элементам */
+}
+
+.math-card { /* основная карточка для красивого показа формы */
+    border: 1px solid #d9e2ec; /* мягкая граница, чтобы карточка читалась, но не выглядела тяжёлой */
+    border-radius: 14px; /* скругляем углы, чтобы карточка выглядела современно и аккуратно */
+    background: #ffffff; /* белый фон карточки для чистого математического блока */
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06); /* лёгкая тень, чтобы отделить карточку от фона страницы */
+    overflow: hidden; /* гарантируем, что внутренние блоки не вылезут за скругления */
+}
+
+.math-card__header { /* верх карточки с названием формы */
+    padding: 16px 18px 12px 18px; /* внутренние отступы, чтобы заголовок не прилипал к краям */
+    border-bottom: 1px solid #eef2f7; /* тонкая линия отделяет заголовок от содержимого */
+    background: #f8fafc; /* чуть выделяем верх карточки спокойным светлым фоном */
+}
+
+.math-card__section { /* отдельная секция внутри карточки: полная или сокращённая форма */
+    padding: 16px 18px; /* комфортные внутренние отступы вокруг содержимого */
+}
+
+.math-card__section + .math-card__section { /* все секции, начиная со второй, визуально отделяем от предыдущей */
+    border-top: 1px solid #eef2f7; /* линия между полной и сокращённой формой */
+}
+
+.math-card__label { /* подпись "Полная форма" / "Сокращённая форма" */
+    margin-bottom: 10px; /* делаем расстояние между подписью и формулой */
+    font-size: 0.95rem; /* немного уменьшаем размер, чтобы это была подпись, а не главный текст */
+    font-weight: 600; /* делаем подпись уверенной и читаемой */
+    color: #334155; /* спокойный тёмно-серый цвет для хорошей читаемости */
+}
+
+.math-expression { /* сам блок с математической формулой */
+    padding: 14px 16px; /* внутренние отступы внутри блока формулы */
+    border: 1px solid #e2e8f0; /* отдельная мягкая рамка вокруг формулы */
+    border-radius: 12px; /* скругление блока формулы, чтобы он визуально совпадал со стилем карточки */
+    background: #f8fafc; /* светлый фон, на котором формула читается лучше */
+    color: #0f172a; /* насыщенный тёмный цвет текста для хорошего контраста */
+    font-size: 1.04rem; /* немного увеличиваем размер, чтобы математика читалась лучше обычного текста */
+    line-height: 1.7; /* увеличиваем межстрочный интервал, чтобы длинные выражения не выглядели слипшимися */
+    font-family: "Cambria Math", "STIX Two Math", "Times New Roman", serif; /* используем более математичный шрифт */
+    white-space: nowrap; /* не переносим формулу как попало по словам и токенам */
+    overflow-x: auto; /* если формула длинная, даём горизонтальную прокрутку вместо уродливого переноса */
+    overflow-y: hidden; /* по вертикали прокрутка здесь не нужна */
+    scrollbar-width: thin; /* делаем скролл тоньше в Firefox */
+}
+
+.math-expression::-webkit-scrollbar { /* настраиваем горизонтальный скролл для Chrome/Edge/Safari */
+    height: 8px; /* делаем полосу прокрутки компактной */
+}
+
+.math-expression::-webkit-scrollbar-thumb { /* бегунок полосы прокрутки */
+    background: #cbd5e1; /* мягкий серо-голубой цвет, чтобы скролл не бросался в глаза */
+    border-radius: 999px; /* делаем бегунок округлым */
+}
+
+.math-expression::-webkit-scrollbar-track { /* дорожка полосы прокрутки */
+    background: transparent; /* дорожку делаем почти незаметной */
+}

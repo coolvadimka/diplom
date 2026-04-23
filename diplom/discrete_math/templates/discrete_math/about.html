@@ -1,4 +1,51 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 {% block content %}
-<h1>{{ title }}</h1>
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+        <h1>О проекте</h1>
+        <p class="lead text-muted">
+            Онлайн-калькулятор для работы с k-значной логикой
+        </p>
+    </div>
+
+    <div class="row text-center mb-5">
+        <div class="col-md-4">
+            <h4>Что это?</h4>
+            <p>
+                Веб-приложение для вычисления логических выражений
+                в k-значной логике и построения таблиц истинности.
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Для кого?</h4>
+            <p>
+                Для студентов и преподавателей,
+                изучающих дискретную математику
+                и математическую логику.
+            </p>
+        </div>
+
+        <div class="col-md-4">
+            <h4>Зачем?</h4>
+            <p>
+                Чтобы быстро проверять выражения,
+                анализировать результаты
+                и упрощать учебный процесс.
+            </p>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="text-center mt-4">
+        <p class="text-muted">
+            Разработано в рамках дипломного проекта.
+        </p>
+    </div>
+
+</div>
+
 {% endblock %}

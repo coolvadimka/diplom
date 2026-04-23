@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block title %}Тестирование{% endblock %}
+
+{% block content %}
+<div class="form-page">
+
+    <div class="form-header">
+        <h2 class="form-title">
+            {% if form.instance.pk %}Редактирование{% else %}Создание{% endif %} тестирования
+        </h2>
+        <a class="form-back" href="{% url 'testing:list' %}">← К списку</a>
+    </div>
+
+    <div class="form-card">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <label class="dm-label">Название</label>
+                {{ form.title }}
+                {% if form.title.errors %}
+                    <div class="dm-error">{{ form.title.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-row">
+                <label class="dm-label">Описание</label>
+                {{ form.description }}
+                {% if form.description.errors %}
+                    <div class="dm-error">{{ form.description.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-row">
+                <label class="dm-label">Лимит времени в минутах</label>
+                {{ form.time_limit_minutes }}
+                <div class="dm-help">Оставьте пустым, если тест без ограничения по времени.</div>
+                {% if form.time_limit_minutes.errors %}
+                    <div class="dm-error">{{ form.time_limit_minutes.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-row form-check-row">
+                <div class="check-wrap">
+                    {{ form.is_required }}
+                    <label class="dm-check-label">Обязательное тестирование</label>
+                </div>
+                {% if form.is_required.errors %}
+                    <div class="dm-error">{{ form.is_required.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-row form-check-row">
+                <div class="check-wrap">
+                    {{ form.allow_back_navigation }}
+                    <label class="dm-check-label">Разрешить возврат к предыдущим вопросам</label>
+                </div>
+                {% if form.allow_back_navigation.errors %}
+                    <div class="dm-error">{{ form.allow_back_navigation.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-row form-check-row">
+                <div class="check-wrap">
+                    {{ form.is_published }}
+                    <label class="dm-check-label">Опубликовать</label>
+                </div>
+                {% if form.is_published.errors %}
+                    <div class="dm-error">{{ form.is_published.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-actions">
+                <div class="actions-left"></div>
+                <div class="actions-right">
+                    <button class="action-btn save-btn" type="submit">Сохранить</button>
+                    <a class="action-btn cancel-btn" href="{% url 'testing:list' %}">Отмена</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

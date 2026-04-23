@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}{{ material.title }}{% endblock %}
+
+{% block content %}
+<div class="detail-header">
+  <h2 class="detail-title">{{ material.title }}</h2>
+  <a class="detail-back" href="{% url 'materials:list' %}">← Назад к списку</a>
+</div>
+
+<div class="dm-card">
+
+  <!-- верх карточки: мета слева, статус справа -->
+  <div class="detail-top">
+    <div class="detail-meta">
+      {% if material.author %}
+        <span>Автор: <b>{{ material.author.username }}</b></span>
+        <span class="detail-sep">·</span>
+      {% endif %}
+
+      <span>Создано: {{ material.created_at|date:"d.m.Y H:i" }}</span>
+      <span class="detail-sep">·</span>
+      <span>Обновлено: {{ material.updated_at|date:"d.m.Y H:i" }}</span>
+
+      {% if user.is_authenticated and user.is_teacher and material.is_published and material.published_at %}
+        <span class="detail-sep">·</span>
+        <span>Публикация: {{ material.published_at|date:"d.m.Y H:i" }}</span>
+      {% endif %}
+    </div>
+
+    {% if user.is_authenticated and user.is_teacher %}
+      {% if material.is_published %}
+        <span class="material-status published">Опубликовано</span>
+      {% else %}
+        <span class="material-status draft">Черновик</span>
+      {% endif %}
+    {% endif %}
+  </div>
+
+  <div class="detail-divider"></div>
+
+  <div class="material-content detail-content">
+    {{ material.content|linebreaks }}
+  </div>
+
+  {% if user.is_authenticated and user.is_teacher %}
+    <div class="detail-actions">
+      <a class="action-btn edit-btn" href="{% url 'materials:edit' material.slug %}">Редактировать</a>
+      <a class="action-btn delete-btn" href="{% url 'materials:delete' material.slug %}">Удалить</a>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

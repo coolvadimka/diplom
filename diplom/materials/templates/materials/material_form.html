@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Материал{% endblock %}
+
+{% block content %}
+<div class="form-page">
+
+  <div class="form-header">
+    <h2 class="form-title">
+      {% if form.instance.pk %}Редактирование{% else %}Добавление{% endif %} материала
+    </h2>
+
+    <a class="form-back" href="{% url 'materials:list' %}">← К списку</a>
+  </div>
+
+  <div class="form-card">
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="form-row">
+        <label class="dm-label">Название</label>
+        {{ form.title }}
+        {% if form.title.errors %}
+          <div class="dm-error">{{ form.title.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-row">
+        <label class="dm-label">Краткое описание</label>
+        {{ form.short_description }}
+        {% if form.short_description.errors %}
+          <div class="dm-error">{{ form.short_description.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-row">
+        <label class="dm-label">Текст материала</label>
+        {{ form.content }}
+        {% if form.content.errors %}
+          <div class="dm-error">{{ form.content.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-row form-check-row">
+        <div class="check-wrap">
+          {{ form.is_published }}
+          <label class="dm-check-label">Опубликовать</label>
+        </div>
+        <div class="dm-help">{{ form.is_published.help_text }}</div>
+      </div>
+
+      <div class="form-actions">
+
+  <div class="actions-left">
+    {% if form.instance.pk %}
+      <a class="action-btn delete-btn"
+         href="{% url 'materials:delete' form.instance.slug %}">
+        Удалить
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="actions-right">
+    <button class="action-btn save-btn" type="submit">Сохранить</button>
+    <a class="action-btn cancel-btn" href="{% url 'materials:list' %}">Отмена</a>
+  </div>
+
+</div>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

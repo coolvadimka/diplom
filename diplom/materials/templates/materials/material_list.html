@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Учебные материалы{% endblock %}
+
+{% block content %}
+<div class="materials-header">
+  <h2 class="materials-title">Учебные материалы:</h2>
+
+  {% if user.is_authenticated and user.is_teacher %}
+    <a class="add-material-btn" href="{% url 'materials:add' %}">
+      + Добавить материал
+    </a>
+  {% endif %}
+</div>
+
+<div class="materials-list">
+  {% for m in materials %}
+    <div class="dm-card">
+
+
+      <div class="dm-card-header">
+        <h5 class="dm-card-title">{{ m.title }}</h5>
+
+        {% if user.is_authenticated and user.is_teacher %}
+          {% if m.is_published %}
+            <span class="material-status published">Опубликовано</span>
+          {% else %}
+            <span class="material-status draft">Черновик</span>
+          {% endif %}
+        {% endif %}
+      </div>
+
+
+      <div class="dm-card-meta">
+        {% if m.author %}
+          <span class="material-author">{{ m.author.username }}</span>
+          <span class="material-sep">·</span>
+        {% endif %}
+        <span class="material-date">{{ m.created_at|date:"d.m.Y" }}</span>
+      </div>
+
+
+      <div class="dm-card-body">
+        <p class="dm-card-text">{{ m.short_description }}</p>
+
+        <div class="dm-card-actions">
+
+  {% if user.is_authenticated and user.is_teacher %}
+    <div class="actions-left">
+      <a class="action-btn edit-btn" href="{% url 'materials:edit' m.slug %}">Редактировать</a>
+      <a class="action-btn delete-btn" href="{% url 'materials:delete' m.slug %}">Удалить</a>
+    </div>
+  {% endif %}
+
+  <a class="action-btn read-btn" href="{{ m.get_absolute_url }}">Читать далее</a>
+
+</div>
+      </div>
+
+    </div>
+  {% empty %}
+    <p class="text-muted">Материалов пока нет.</p>
+  {% endfor %}
+</div>
+{% endblock %}

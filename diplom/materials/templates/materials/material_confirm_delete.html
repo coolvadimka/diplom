@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Удаление{% endblock %}
+
+{% block content %}
+<div class="delete-page">
+
+  <div class="delete-header">
+    <h2 class="delete-title">Удалить материал?</h2>
+    <a class="delete-back" href="{{ object.get_absolute_url }}">← Назад</a>
+  </div>
+
+  <div class="delete-card">
+    <div class="delete-warning">
+      Это действие нельзя отменить.
+    </div>
+
+    <div class="delete-object">
+      <div class="delete-label">Учебный материал:</div>
+      <div class="delete-name">{{ object.title }}</div>
+    </div>
+
+    <form method="post" class="delete-actions">
+      {% csrf_token %}
+      <button class="action-btn delete-btn" type="submit">Удалить</button>
+      <a class="action-btn cancel-btn" href="{{ object.get_absolute_url }}">Отмена</a>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

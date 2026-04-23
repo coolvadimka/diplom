@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Вопрос тестирования{% endblock %}
+
+{% block content %}
+<div class="form-page">
+
+    <div class="form-header">
+        <h2 class="form-title">
+            {% if form.instance.pk %}Редактирование{% else %}Добавление{% endif %} вопроса
+        </h2>
+        <a class="form-back" href="{% url 'testing:detail' test_obj.pk %}">← К тестированию</a>
+    </div>
+
+    <div class="form-card">
+        <div class="dm-help" style="margin-bottom: 14px;">
+            Тестирование: <strong>{{ test_obj.title }}</strong>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <label class="dm-label">Текст вопроса</label>
+                {{ form.text }}
+                {% if form.text.errors %}
+                    <div class="dm-error">{{ form.text.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-row">
+                <label class="dm-label">Тип вопроса</label>
+                {{ form.question_type }}
+                {% if form.question_type.errors %}
+                    <div class="dm-error">{{ form.question_type.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-row">
+                <label class="dm-label">Порядок вопроса</label>
+                {{ form.order }}
+                {% if form.order.errors %}
+                    <div class="dm-error">{{ form.order.errors }}</div>
+                {% endif %}
+            </div>
+
+            <div class="form-actions">
+                <div class="actions-left"></div>
+                <div class="actions-right">
+                    <button class="action-btn save-btn" type="submit">Сохранить</button>
+                    <a class="action-btn cancel-btn" href="{% url 'testing:detail' test_obj.pk %}">Отмена</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+{% endblock %}

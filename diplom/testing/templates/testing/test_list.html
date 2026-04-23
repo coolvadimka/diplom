@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Тестирование{% endblock %}
+
+{% block content %}
+<div class="materials-header">
+    <h2 class="materials-title">Тестирование</h2>
+
+    {% if user.is_authenticated and user.is_teacher %}
+        <a class="add-material-btn" href="{% url 'testing:create' %}">
+            + Добавить тестирование
+        </a>
+    {% endif %}
+</div>
+
+<div class="materials-list">
+    {% for test in tests %}
+        <div class="dm-card">
+            <div class="dm-card-header">
+                <h5 class="dm-card-title">{{ test.title }}</h5>
+
+                {% if user.is_authenticated and user.is_teacher %}
+                    {% if test.is_published %}
+                        <span class="material-status published">Опубликовано</span>
+                    {% else %}
+                        <span class="material-status draft">Черновик</span>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="dm-card-meta">
+                <span>{{ test.author.username }}</span>
+                <span class="material-sep">·</span>
+
+                {% if test.is_required %}
+                    <span>Обязательное</span>
+                {% else %}
+                    <span>Необязательное</span>
+                {% endif %}
+
+                {% if test.time_limit_minutes %}
+                    <span class="material-sep">·</span>
+                    <span>{{ test.time_limit_minutes }} мин.</span>
+                {% endif %}
+            </div>
+
+            <div class="dm-card-body">
+                <p class="dm-card-text">
+                    {{ test.description|default:"Описание отсутствует." }}
+                </p>
+
+                <div class="dm-card-actions">
+                    {% if user.is_authenticated and user.is_teacher %}
+                        <div class="actions-left">
+                            <a class="action-btn edit-btn" href="{% url 'testing:edit' test.pk %}">
+                                Редактировать
+                            </a>
+                        </div>
+                    {% endif %}
+
+                    <a class="action-btn read-btn" href="{% url 'testing:detail' test.pk %}">
+                        Открыть
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <p class="text-muted">Тестирований пока нет.</p>
+    {% endfor %}
+</div>
+{% endblock %}

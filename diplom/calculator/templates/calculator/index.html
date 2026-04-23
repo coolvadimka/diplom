@@ -1,0 +1,414 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="klogic-page">
+    <div class="klogic-card">
+        <div class="klogic-header">
+            <div class="klogic-header-top">
+                <h2>Интерактивный калькулятор многозначных логических операций</h2>
+
+                {% if total_rows > 0 %}
+                    <a
+                        class="klogic-export-btn header-export-btn"
+                        href="{% url 'calculator:export_excel' %}?k={{ form.k.value }}&n={{ form.n.value }}&expression={{ form.expression.value|urlencode }}"
+                    >
+                        Скачать Excel
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+
+        <form method="post" class="klogic-form">
+            {% csrf_token %}
+
+            <div class="klogic-top-fields">
+                <div class="klogic-field small-field">
+                    <label for="{{ form.k.id_for_label }}">
+                        k
+                        <span class="help-icon">
+                            ?
+                            <span class="help-tooltip">
+                                Количество значений логики.<br>
+                                Например, при k=3 переменные принимают значения 0, 1, 2.
+                            </span>
+                        </span>
+                    </label>
+
+                    {{ form.k }}
+                </div>
+
+                {% if form.n %}
+                <div class="klogic-field small-field">
+                    <label for="{{ form.n.id_for_label }}">
+                        n
+                        <span class="help-icon">
+                            ?
+                            <span class="help-tooltip">
+                                Максимально допустимое количество переменных в формуле.
+                            </span>
+                        </span>
+                    </label>
+
+                    {{ form.n }}
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="klogic-field">
+                <label for="{{ form.expression.id_for_label }}">
+                    Формула
+                    <span class="help-icon">
+                        ?
+                        <span class="help-tooltip">
+                            Используйте переменные, функции и символы операций.<br><br>
+                            Примеры:<br>
+                            ¬A<br>
+                            ~A<br>
+                            A+B<br>
+                            (A+B)→C<br>
+                            min(A,B)<br>
+                            j(2,x)
+                        </span>
+                    </span>
+                </label>
+
+                {{ form.expression }}
+
+                {% if basic_forms or forms_error %}
+                    <div class="klogic-forms-box">
+                        <div class="klogic-help-title">Основные формы</div>
+
+                        {% if forms_error %}
+                            <div class="klogic-forms-note">{{ forms_error }}</div>
+                        {% endif %}
+
+                        {% if basic_forms %}
+                            <div class="forms-switches">
+                                <label class="form-toggle">
+                                    <input type="checkbox" onchange="toggleFormBlock('first-form-block', this.checked)">
+                                    <span>1-я основная форма</span>
+                                </label>
+
+                                <label class="form-toggle">
+                                    <input type="checkbox" onchange="toggleFormBlock('second-form-block', this.checked)">
+                                    <span>2-я основная форма</span>
+                                </label>
+
+                                <label class="form-toggle">
+                                    <input type="checkbox" onchange="toggleFormBlock('third-form-block', this.checked)">
+                                    <span>3-я основная форма</span>
+                                </label>
+                            </div>
+
+                            <div id="first-form-block" class="form-expression-block" style="display:none;">
+                                <div class="math-card">
+                                    <div class="math-card__header">
+                                        <div class="form-expression-title">1-я основная форма</div>
+                                    </div>
+
+                                    <div class="math-card__section">
+                                        <div class="math-card__label">Полная форма</div>
+                                        <div class="math-expression">{{ basic_forms.first.full }}</div>
+                                    </div>
+
+                                    <div class="math-card__section">
+                                        <div class="math-card__label">Сокращённая форма</div>
+                                        <div class="math-expression">{{ basic_forms.first.reduced }}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="second-form-block" class="form-expression-block" style="display:none;">
+                                <div class="math-card">
+                                    <div class="math-card__header">
+                                        <div class="form-expression-title">2-я основная форма</div>
+                                    </div>
+
+                                    <div class="math-card__section">
+                                        <div class="math-card__label">Полная форма</div>
+                                        <div class="math-expression">{{ basic_forms.second.full }}</div>
+                                    </div>
+
+                                    <div class="math-card__section">
+                                        <div class="math-card__label">Сокращённая форма</div>
+                                        <div class="math-expression">{{ basic_forms.second.reduced }}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="third-form-block" class="form-expression-block" style="display:none;">
+                                <div class="math-card">
+                                    <div class="math-card__header">
+                                        <div class="form-expression-title">3-я основная форма</div>
+                                    </div>
+
+                                    <div class="math-card__section">
+                                        <div class="math-card__label">Полная форма</div>
+                                        <div class="math-expression">{{ basic_forms.third.full }}</div>
+                                    </div>
+
+                                    <div class="math-card__section">
+                                        <div class="math-card__label">Сокращённая форма</div>
+                                        <div class="math-expression">{{ basic_forms.third.reduced }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <div class="klogic-hint">
+                    Например: <span>¬A</span>, <span>~A</span>, <span>A+B</span>, <span>(A+B)→C</span>
+                </div>
+            </div>
+
+            <div class="calc-panel">
+                <div class="calc-panel-title">Функции и символы</div>
+
+                <div class="calc-grid">
+                    <button type="button" class="calc-btn" onclick="insertText('min(')">min</button>
+                    <button type="button" class="calc-btn" onclick="insertText('max(')">max</button>
+                    <button type="button" class="calc-btn" onclick="insertBinaryOperator('+')">+</button>
+                    <button type="button" class="calc-btn" onclick="insertBinaryOperator('*')">*</button>
+                    <button type="button" class="calc-btn" onclick="insertBinaryOperator('→')">→</button>
+                    <button type="button" class="calc-btn" onclick="insertUnaryOperator('¬')">¬</button>
+
+                    <button type="button" class="calc-btn" onclick="insertUnaryOperator('~')">~</button>
+                    <button type="button" class="calc-btn" onclick="insertText('neg(')">neg</button>
+                    <button type="button" class="calc-btn" onclick="insertText('webb(')">webb</button>
+                    <button type="button" class="calc-btn" onclick="insertBinaryOperator('-')">-</button>
+                    <button type="button" class="calc-btn" onclick="insertBinaryOperator('/')">/</button>
+                    <button type="button" class="calc-btn" onclick="insertText('j(')">j</button>
+
+                    <button type="button" class="calc-btn" onclick="insertText('J(')">J</button>
+                    <button type="button" class="calc-btn" onclick="insertText('const(')">const</button>
+                    <button type="button" class="calc-btn" onclick="insertText('(')">(</button>
+                    <button type="button" class="calc-btn" onclick="insertText(')')">)</button>
+                    <button type="button" class="calc-btn" onclick="insertText(',')">,</button>
+                    <button type="button" class="calc-btn" onclick="insertText('A')">A</button>
+
+                    <button type="button" class="calc-btn" onclick="insertText('B')">B</button>
+                    <button type="button" class="calc-btn" onclick="insertText('C')">C</button>
+                    <button type="button" class="calc-btn" onclick="insertText('D')">D</button>
+                    <button type="button" class="calc-btn" onclick="insertText('E')">E</button>
+                    <button type="button" class="calc-btn" onclick="insertText('F')">F</button>
+                    <button type="button" class="calc-btn" onclick="insertText('0')">0</button>
+
+                    <button type="button" class="calc-btn" onclick="insertText('1')">1</button>
+                    <button type="button" class="calc-btn" onclick="insertText('2')">2</button>
+                    <button type="button" class="calc-btn" onclick="insertText('3')">3</button>
+                    <button type="button" class="calc-btn" onclick="insertText('4')">4</button>
+                    <button type="button" class="calc-btn" onclick="insertText('5')">5</button>
+                    <button type="button" class="calc-btn" onclick="insertText('6')">6</button>
+
+                    <button type="button" class="calc-btn" onclick="insertText('7')">7</button>
+                    <button type="button" class="calc-btn" onclick="insertText('8')">8</button>
+                    <button type="button" class="calc-btn" onclick="insertText('9')">9</button>
+                    <button type="button" class="calc-btn btn-warning-soft" onclick="backspaceExpression()">⌫</button>
+                    <button type="button" class="calc-btn btn-danger-soft" onclick="clearExpression()">C</button>
+                    <button type="button" class="calc-btn btn-example" onclick="fillExample()">Пример</button>
+                </div>
+            </div>
+
+            <div class="klogic-help-box">
+                <div class="klogic-help-title">Справка по функциям</div>
+
+                <div class="klogic-help-grid">
+                    <div><strong>min(x,y,...)</strong> — минимум</div>
+                    <div><strong>max(x,y,...)</strong> — максимум</div>
+
+                    <div><strong>x+y</strong> — сумма по модулю k</div>
+                    <div><strong>x*y</strong> — произведение по модулю k</div>
+
+                    <div><strong>x-y</strong> — разность по модулю k</div>
+                    <div><strong>x/y</strong> — усечённая разность</div>
+
+                    <div><strong>x→y</strong> — импликация</div>
+                    <div><strong>¬x</strong> — отрицание Поста</div>
+
+                    <div><strong>~x</strong> — отрицание Лукашевича</div>
+                    <div><strong>neg(x)</strong> — отрицание по модулю k</div>
+
+                    <div><strong>webb(x,y)</strong> — функция Вебба</div>
+                    <div><strong>j(i,x)</strong> — характеристическая функция 1-го рода, где i — число от 0 до k-1</div>
+
+                    <div><strong>J(i,x)</strong> — характеристическая функция 2-го рода, где i — число от 0 до k-1</div>
+                    <div><strong>const(c)</strong> — константа, где c — число от 0 до k-1</div>
+                </div>
+            </div>
+
+            <div class="calc-actions">
+                <button type="submit" class="main-submit-btn">Построить</button>
+            </div>
+        </form>
+
+        {% if error %}
+            <div class="calc-error">
+                Ошибка: {{ error }}
+            </div>
+        {% endif %}
+
+        {% if table %}
+            <div class="truth-table-block">
+                <h3>Таблица истинности</h3>
+                <div class="klogic-table-info">
+                    <div>Всего строк: <strong>{{ total_rows }}</strong></div>
+                    {% if is_truncated %}
+                        <div>Показаны первые <strong>{{ preview_rows }}</strong> строк</div>
+                    {% endif %}
+                </div>
+
+                <div class="truth-table-wrap">
+                    <table class="truth-table">
+                        <thead>
+                            <tr>
+                                {% for var in variables %}
+                                    <th>{{ var }}</th>
+                                {% endfor %}
+                                <th>{{ result_name }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in table %}
+                                <tr>
+                                    {% for value in row.values %}
+                                        <td>{{ value }}</td>
+                                    {% endfor %}
+                                    <td class="result-cell">{{ row.result }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% if is_truncated %}
+                    <div class="klogic-table-note">
+                        Полная таблица доступна для скачивания в Excel.
+                    </div>
+                    <div class="klogic-export-wrap">
+                        <a
+                            class="klogic-export-btn"
+                            href="{% url 'calculator:export_excel' %}?k={{ form.k.value }}&n={{ form.n.value }}&expression={{ form.expression.value|urlencode }}"
+                        >
+                            Скачать Excel
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    function getExpressionInput() {
+        return document.getElementById("id_expression");
+    }
+
+    function insertText(text) {
+        const input = getExpressionInput();
+        if (!input) return;
+
+        const start = input.selectionStart ?? input.value.length;
+        const end = input.selectionEnd ?? input.value.length;
+        const value = input.value;
+
+        input.value = value.slice(0, start) + text + value.slice(end);
+        input.focus();
+
+        const cursor = start + text.length;
+        input.setSelectionRange(cursor, cursor);
+    }
+
+    function insertUnaryOperator(symbol) {
+        const input = getExpressionInput();
+        if (!input) return;
+
+        const start = input.selectionStart ?? input.value.length;
+        const end = input.selectionEnd ?? input.value.length;
+        const value = input.value;
+        const selectedText = value.slice(start, end);
+
+        let insertedText;
+        let cursorPosition;
+
+        if (selectedText) {
+            insertedText = `${symbol}(${selectedText})`;
+        } else {
+            insertedText = symbol;
+        }
+
+        input.value = value.slice(0, start) + insertedText + value.slice(end);
+        input.focus();
+
+        cursorPosition = start + insertedText.length;
+        input.setSelectionRange(cursorPosition, cursorPosition);
+    }
+
+    function insertBinaryOperator(symbol) {
+        const input = getExpressionInput();
+        if (!input) return;
+
+        const start = input.selectionStart ?? input.value.length;
+        const end = input.selectionEnd ?? input.value.length;
+        const value = input.value;
+        const selectedText = value.slice(start, end);
+
+        let insertedText;
+        let cursorPosition;
+
+        if (selectedText) {
+            insertedText = `${selectedText}${symbol}`;
+        } else {
+            insertedText = symbol;
+        }
+
+        input.value = value.slice(0, start) + insertedText + value.slice(end);
+        input.focus();
+
+        cursorPosition = start + insertedText.length;
+        input.setSelectionRange(cursorPosition, cursorPosition);
+    }
+
+    function clearExpression() {
+        const input = getExpressionInput();
+        if (!input) return;
+        input.value = "";
+        input.focus();
+    }
+
+    function backspaceExpression() {
+        const input = getExpressionInput();
+        if (!input) return;
+
+        const start = input.selectionStart ?? input.value.length;
+        const end = input.selectionEnd ?? input.value.length;
+        const value = input.value;
+
+        if (start !== end) {
+            input.value = value.slice(0, start) + value.slice(end);
+            input.focus();
+            input.setSelectionRange(start, start);
+            return;
+        }
+
+        if (start > 0) {
+            input.value = value.slice(0, start - 1) + value.slice(end);
+            input.focus();
+            input.setSelectionRange(start - 1, start - 1);
+        }
+    }
+
+    function fillExample() {
+        const input = getExpressionInput();
+        if (!input) return;
+        input.value = "(¬A+B)→~B";
+        input.focus();
+    }
+
+    function toggleFormBlock(blockId, isChecked) {
+        const block = document.getElementById(blockId);
+        if (!block) return;
+        block.style.display = isChecked ? "block" : "none";
+    }
+</script>
+{% endblock %}

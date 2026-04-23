@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block title %}Тестирование{% endblock %}
+
+{% block content %}
+<div class="form-page">
+
+    <div class="detail-header">
+        <h2 class="detail-title">{{ test_obj.title }}</h2>
+        <a class="detail-back" href="{% url 'testing:list' %}">← К списку</a>
+    </div>
+
+    <div class="form-card">
+        <div class="detail-top">
+            <div class="detail-meta">
+                <span>Автор: {{ test_obj.author.username }}</span>
+                <span class="detail-sep">•</span>
+
+                {% if test_obj.is_required %}
+                    <span>Обязательное</span>
+                {% else %}
+                    <span>Необязательное</span>
+                {% endif %}
+
+                {% if test_obj.time_limit_minutes %}
+                    <span class="detail-sep">•</span>
+                    <span>{{ test_obj.time_limit_minutes }} мин.</span>
+                {% endif %}
+            </div>
+
+            {% if user.is_authenticated and user.is_teacher %}
+                <a class="action-btn edit-btn" href="{% url 'testing:edit' test_obj.pk %}">
+                    Редактировать
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="detail-divider"></div>
+
+        <div class="detail-content">
+            {% if test_obj.description %}
+                <p>{{ test_obj.description|linebreaks }}</p>
+            {% else %}
+                <p>Описание отсутствует.</p>
+            {% endif %}
+        </div>
+
+        <div class="detail-divider"></div>
+
+        <div class="detail-content">
+            <p>
+                <strong>Возврат к предыдущим вопросам:</strong>
+                {% if test_obj.allow_back_navigation %}
+                    разрешён
+                {% else %}
+                    запрещён
+                {% endif %}
+            </p>
+
+            <p>
+                <strong>Статус публикации:</strong>
+                {% if test_obj.is_published %}
+                    опубликовано
+                {% else %}
+                    черновик
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="detail-divider"></div>
+
+        <div class="detail-header" style="margin-bottom: 12px;">
+            <h3 class="detail-title" style="font-size: 22px;">Вопросы тестирования</h3>
+
+            {% if user.is_authenticated and user.is_teacher %}
+                <a class="action-btn read-btn" href="{% url 'testing:question_add' test_obj.pk %}">
+                    + Добавить вопрос
+                </a>
+            {% endif %}
+        </div>
+
+        <div class="materials-list">
+            {% for question in test_obj.questions.all %}
+                <div class="dm-card">
+                    <div class="dm-card-header">
+                        <h5 class="dm-card-title">Вопрос {{ question.order }}</h5>
+
+                        <span class="material-status {% if question.question_type == 'single_choice' %}published{% else %}draft{% endif %}">
+                            {% if question.question_type == "single_choice" %}
+                                Один вариант ответа
+                            {% elif question.question_type == "number" %}
+                                Числовой ответ
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div class="dm-card-body">
+                        <p class="dm-card-text">{{ question.text }}</p>
+
+                        {% if user.is_authenticated and user.is_teacher %}
+                            <div class="dm-card-actions">
+                                <div class="actions-left">
+                                    <a class="action-btn edit-btn" href="{% url 'testing:question_edit' question.pk %}">
+                                        Редактировать
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-muted">В этом тестировании пока нет вопросов.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}
